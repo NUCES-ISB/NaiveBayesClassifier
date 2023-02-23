@@ -1,2 +1,6 @@
 
-return False
+def test():
+  
+  return False
+
+test()

@@ -20,5 +20,9 @@ jobs:
       if: steps.test_result.outcome == 'success'
       run: |
         git checkout master
+        git pull
+        git checkout itaimoor
+        git pull
+        git checkout itaimoor
+        git pull
         git merge itaimoor
-        git push origin master

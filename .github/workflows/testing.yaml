@@ -20,5 +20,5 @@ jobs:
       if: steps.test_result.outcome == 'success'
       run: |
         git checkout master
-        git merge test
+        git merge itaimoor
         git push origin master

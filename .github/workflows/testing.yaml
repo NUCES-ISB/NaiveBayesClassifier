@@ -1,18 +1,24 @@
+name: Merge branch to master on test success
 
-name: Merge any release branch to uat
 on:
   push:
     branches:
-      - 'release/*'
+      - itaimoor
+
 jobs:
-  merge-branch:
+  merge_branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
-      - name: Merge staging -> uat
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          target_branch: uat
-          github_token: ${{ github.token }}
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: master
+    - name: Run test.py
+      run: python test.py
+      id: test_result
+    - name: Merge branch with master
+      if: steps.test_result.outcome == 'success'
+      run: |
+        git checkout master
+        git merge test
+        git push origin master

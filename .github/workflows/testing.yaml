@@ -1,0 +1,24 @@
+name: Master branch push workflow
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Run test.py
+      run: python test.py
+      id: test_result
+    - name: Reject changes if test.py fails
+      if: steps.test_result.outcome != 'success'
+      run: |
+        echo "Changes rejected. Please ensure that test.py passes before pushing to master."
+        exit 1
+    - name: Make changes to master
+      if: steps.test_result.outcome == 'success'
+      run: |
+        echo "Changes passed test.py. Pushing changes to master."
+        git push origin master

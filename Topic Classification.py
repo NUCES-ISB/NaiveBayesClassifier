@@ -11,7 +11,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import model_selection, naive_bayes, svm
 from sklearn.metrics import accuracy_score
 
-#Set Random seed
 np.random.seed(500)
 
 # Add the Data using pandas
